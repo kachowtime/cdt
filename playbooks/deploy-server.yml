@@ -22,7 +22,7 @@
 
 
 - name: Baseline Windows 2022 File Server
-  hosts: windows_file_server
+  hosts: windows_fileserver
   gather_facts: yes
 
   tasks:
