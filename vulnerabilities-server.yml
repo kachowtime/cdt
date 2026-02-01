@@ -58,15 +58,15 @@
       type: dword
 
   # Task 6
-  # Allow RDP through Windows Firewall
+  # Allow RDP through Windows Firewall (legacy netsh method)
   - name: Allow RDP through Windows Firewall
-    ansible.windows.win_firewall_rule:
-      name: Allow-RDP
-      localport: 3389
-      protocol: TCP
-      direction: In
-      action: Allow
-      enabled: yes
+    ansible.windows.win_shell: >
+      netsh advfirewall firewall add rule
+      name="Allow RDP"
+      dir=in
+      action=allow
+      protocol=TCP
+      localport=3389
 
   # Task 7
   # Create the root directory for file shares
@@ -76,7 +76,7 @@
       state: directory
 
   # Task 8
-  # Create insecure SMB share with full control for Everyone
+  # Create an insecure SMB share with full control for Everyone
   - name: Create insecure SMB share
     ansible.windows.win_share:
       name: "{{ file_share_name }}"
