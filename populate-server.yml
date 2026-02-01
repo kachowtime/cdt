@@ -1,0 +1,32 @@
+# File: populate-server.yml
+#
+# Purpose
+# Populates the existing SMB share with cyberpunk-themed files.
+#
+# Dependency
+# deploy-server.yml must be executed first.
+
+- name: Populate File Server Share
+  hosts: windows_fileserver
+  gather_facts: no
+  vars_files:
+    - vars/populate.yml
+  become: yes
+  become_method: runas
+  become_user: Administrator
+
+  tasks:
+
+    # Task 1: Create cyberpunk subfolders inside share
+    - name: Create cyberpunk folders
+      ansible.windows.win_file:
+        path: "{{ share_path }}\\{{ item.folder }}"
+        state: directory
+      loop: "{{ populate }}"
+
+    # Task 2: Populate cyberpunk files
+    - name: Populate cyberpunk files
+      ansible.windows.win_copy:
+        dest: "{{ share_path }}\\{{ item.0.folder }}\\{{ item.1.name }}"
+        content: "{{ item.1.content }}"
+      loop: "{{ populate | subelements('files') }}"
