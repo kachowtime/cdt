@@ -1,0 +1,56 @@
+---
+# Variables for configure deployments. 
+
+# AD Groups (7)
+
+ad_groups:
+  - Neon-Ops
+  - CyberForge
+  - SynthAdmin
+  - Chrome-Runners
+  - NeoSlicers
+  - DataWraiths
+  - CDT
+
+
+# Corporate Users (3 per dept)
+
+ad_users:
+  # Neon-Ops (Operations)
+  - { name: "v", password: "Neon123!", group: "Neon-Ops", title: "Street Runner", description: "Executes field operations." }
+  - { name: "neon", password: "LightRun99", group: "Neon-Ops", title: "Field Operator", description: "Handles urban missions." }
+  - { name: "onyx", password: "DarkOps77", group: "Neon-Ops", title: "Operations Specialist", description: "Supports covert ops." }
+
+  # CyberForge (Engineering)
+  - { name: "deckard", password: "CyberDeck42", group: "CyberForge", title: "Systems Engineer", description: "Maintains core infrastructure." }
+  - { name: "aurora", password: "IceBreaker1", group: "CyberForge", title: "Software Engineer", description: "Develops internal applications." }
+  - { name: "nova", password: "StarHack88", group: "CyberForge", title: "AI Developer", description: "Builds automation tools." }
+
+  # SynthAdmin (HR / Admin)
+  - { name: "rix", password: "SynthLife!", group: "SynthAdmin", title: "HR Coordinator", description: "Manages personnel records." }
+  - { name: "pixel", password: "Render42!", group: "SynthAdmin", title: "Data Clerk", description: "Maintains corporate data." }
+  - { name: "glimmer", password: "Payroll1!", group: "SynthAdmin", title: "Payroll Specialist", description: "Manages payroll systems." }
+
+  # Chrome-Runners (Logistics / Couriers)
+  - { name: "blade", password: "Slice123!", group: "Chrome-Runners", title: "Data Runner", description: "Handles high-risk transfers." }
+  - { name: "pulse", password: "NeuroWave3", group: "Chrome-Runners", title: "Signal Technician", description: "Manages signal systems." }
+  - { name: "flux", password: "Quantum99", group: "Chrome-Runners", title: "Courier Specialist", description: "Delivers sensitive data." }
+
+  # NeoSlicers (Recon / Access)
+  - { name: "ghost", password: "Shadow123!", group: "NeoSlicers", title: "Network Infiltrator", description: "Performs covert access." }
+  - { name: "raven", password: "CrowHack!", group: "NeoSlicers", title: "Recon Operator", description: "Conducts network reconnaissance." }
+  - { name: "sable", password: "NightHack!", group: "NeoSlicers", title: "Access Broker", description: "Identifies exploitable systems." }
+
+  # DataWraiths (Security / Monitoring)
+  - { name: "tracer", password: "TraceMe!", group: "DataWraiths", title: "Threat Analyst", description: "Monitors network threats." }
+  - { name: "vega", password: "NightSky1", group: "DataWraiths", title: "Forensic Analyst", description: "Performs incident analysis." }
+  - { name: "ghostbyte", password: "ByteMe42", group: "DataWraiths", title: "Malware Analyst", description: "Analyzes malicious code." }
+
+
+# Blue Team Accounts (4)
+
+cdt_users:
+  - { name: "cdt-ada", password: "Defend123!", title: "CDT Analyst", description: "Monitors alerts and logs." }
+  - { name: "cdt-glitch", password: "Defend123!", title: "CDT Incident Responder", description: "Responds to security incidents." }
+  - { name: "cdt-matrix", password: "Defend123!", title: "CDT Security Engineer", description: "Maintains defensive tooling." }
+  - { name: "cdt-vex", password: "Defend123!", title: "CDT Lead", description: "Leads defense operations." }
