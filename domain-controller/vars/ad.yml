@@ -7,7 +7,7 @@ netbios_name: "CYBERPUNK"
 
 # Local Administrator account
 local_admin_user: "Administrator"
-new_admin_password: "YS#olK5L?y!8p$IAlCPp"
+new_admin_password: "YS#olK5L?y!8p$IAlCPp" # hard coded in new-inventory.ini
 
 # DSRM (Directory Services Restore Mode) password
 safe_mode_password: ";b8zJOt2B.OLp~ynR|3Y"

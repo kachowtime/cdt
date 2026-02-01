@@ -1,0 +1,39 @@
+---
+# Playbook: configure.yml
+# Purpose: Configure Active Directory with groups and users. 
+
+- name: Deploy AD Groups and Users
+  hosts: dc
+  gather_facts: false
+  vars_files:
+    - vars/users.yml
+
+  tasks:
+
+    - name: Create Active Directory Groups
+      community.windows.win_ad_group:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ ad_groups }}"
+
+    - name: Create Corporate Users
+      community.windows.win_user:
+        name: "{{ item.key }}"
+        password: "{{ item.value.password }}"
+        groups:
+          - "{{ item.value.group }}"
+        description: "{{ item.value.title }} - {{ item.value.description }}"
+        password_never_expires: true
+        state: present
+      loop: "{{ ad_users | dict2items }}"
+
+    - name: Create CDT Users
+      community.windows.win_user:
+        name: "{{ item.key }}"
+        password: "{{ item.value.password }}"
+        groups:
+          - CDT
+        description: "{{ item.value.title }} - {{ item.value.description }}"
+        password_never_expires: true
+        state: present
+      loop: "{{ cdt_users | dict2items }}"
