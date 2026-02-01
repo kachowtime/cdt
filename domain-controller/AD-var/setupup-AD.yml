@@ -1,0 +1,15 @@
+# Variables for Domain Controller deployment
+# This file is used by deploy_ad.yml
+
+# Domain information
+domain_name: "cyberpunk.local"         # Fully Qualified Domain Name
+netbios_name: "CYBERPUNK"              # Short NetBIOS name for domain
+
+# Directory Services Restore Mode (DSRM) password
+safe_mode_password: "CyberpunkDSRM123!"
+
+# Domain administrator credentials (used after DC promotion)
+domain_admin_user: "Administrator"
+domain_admin_password: "Passw0rd!"
+
+
