@@ -37,6 +37,7 @@
         - Administrators
       state: present
       password_never_expires: true
+      user_cannot_change_password: true
 
   # Task 4
   # Enable the built-in Guest account
@@ -44,6 +45,7 @@
     ansible.windows.win_user:
       name: Guest
       account_disabled: no
+      password_never_expires: true
       state: present
 
   # Task 5
@@ -56,14 +58,25 @@
       type: dword
 
   # Task 6
+  # Allow RDP through Windows Firewall
+  - name: Allow RDP through Windows Firewall
+    ansible.windows.win_firewall_rule:
+      name: Allow-RDP
+      localport: 3389
+      protocol: TCP
+      direction: In
+      action: Allow
+      enabled: yes
+
+  # Task 7
   # Create the root directory for file shares
   - name: Create file share root directory
     ansible.windows.win_file:
       path: "{{ file_share_root }}"
       state: directory
 
-  # Task 7
-  # Create an insecure SMB share with full control for Everyone
+  # Task 8
+  # Create insecure SMB share with full control for Everyone
   - name: Create insecure SMB share
     ansible.windows.win_share:
       name: "{{ file_share_name }}"
@@ -71,7 +84,7 @@
       full: Everyone
       state: present
 
-  # Task 8
+  # Task 9
   # Create cyberpunk-themed subfolders inside the share
   - name: Create cyberpunk folders
     ansible.windows.win_file:
@@ -79,7 +92,7 @@
       state: directory
     loop: "{{ populate }}"
 
-  # Task 9
+  # Task 10
   # Populate cyberpunk files inside each folder
   - name: Populate cyberpunk files
     ansible.windows.win_copy:
