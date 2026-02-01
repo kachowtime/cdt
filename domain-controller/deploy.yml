@@ -7,7 +7,7 @@
   hosts: domain_controller
   gather_facts: yes
   vars_files:
-    - ../AD-var/setup-AD.yml
+    - ../vars/ad.yml
 
   tasks:
 
