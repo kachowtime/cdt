@@ -37,7 +37,6 @@
         - Administrators
       state: present
       password_never_expires: true
-      user_cannot_change_password: true
 
   # Task 4
   # Enable the built-in Guest account
