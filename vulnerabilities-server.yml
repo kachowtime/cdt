@@ -9,7 +9,7 @@
   hosts: windows
   gather_facts: false
   vars_files:
-    - vars/vulnerable_windows.yml
+    - vars/vulnerabilities.yml
 
   tasks:
 
