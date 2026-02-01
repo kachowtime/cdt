@@ -1,0 +1,19 @@
+# Purpose
+# Store all configurable values for the file server.
+# Makes the playbook easier to maintain and re-run on different servers.
+
+# Root directory for all shares
+share_root: "D:\\FileShares"
+
+# Share definitions
+shares:
+  - name: "Public"
+    path: "D:\\FileShares\\Public"
+    description: "Public company share"
+
+# NTFS permissions for the folders
+# 'Users' here refers to local Windows Users group
+ntfs_permissions:
+  - path: "D:\\FileShares\\Public"
+    user: "Users"
+    permission: "Modify"
