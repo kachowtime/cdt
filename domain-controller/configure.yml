@@ -3,7 +3,7 @@
 # Purpose: Configure Active Directory with groups and users. 
 
 - name: Deploy AD Groups and Users
-  hosts: dc
+  hosts: domain_controller
   gather_facts: false
   vars_files:
     - vars/users.yml
