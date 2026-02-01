@@ -1,19 +1,10 @@
-# Purpose
-# Store all configurable values for the file server.
-# Makes the playbook easier to maintain and re-run on different servers.
+# File: vars/deploy.yml
+#
+# Purpose: Variables for deploy_file_server.yml
+# Makes the file server path, share name, and users configurable
 
-# Root directory for all shares
-share_root: "D:\\FileShares"
-
-# Share definitions
-shares:
-  - name: "Public"
-    path: "D:\\FileShares\\Public"
-    description: "Public company share"
-
-# NTFS permissions for the folders
-# 'Users' here refers to local Windows Users group
-ntfs_permissions:
-  - path: "D:\\FileShares\\Public"
-    user: "Users"
-    permission: "Modify"
+file_share_root: "S:\\FileShares"
+file_share_name: "Public"
+file_share_description: "Public company file share"
+file_share_user: "BUILTIN\\Users"
+file_share_permission: "Modify"
