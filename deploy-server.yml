@@ -2,7 +2,7 @@
 #
 # Purpose
 # Configures a baseline Windows Server 2022 file server.
-# Installs File Server role, creates share directories on the system disk,
+# Installs the File Server role, creates share directories on the system disk,
 # publishes an SMB share, and applies NTFS permissions.
 #
 # Scope
@@ -26,24 +26,28 @@
   tasks:
 
     # Task 1: Install File Server role
+    # Purpose: Enables SMB file sharing functionality
     - name: Install File Server role
       ansible.windows.win_feature:
         name: FS-FileServer
         state: present
 
     # Task 2: Create root directory for file shares
-    - name: Create file share root directory
+    # Purpose: Base directory to hold all file shares
+    - name: Create root file share directory
       ansible.windows.win_file:
         path: "{{ file_share_root }}"
         state: directory
 
     # Task 3: Create Public share directory
-    - name: Create Public share directory
+    # Purpose: Directory to be exposed via SMB
+    - name: Create Public folder
       ansible.windows.win_file:
         path: "{{ file_share_root }}\\{{ file_share_name }}"
         state: directory
 
     # Task 4: Create SMB share
+    # Purpose: Publishes the Public directory over the network
     - name: Create SMB Public share
       ansible.windows.win_share:
         name: "{{ file_share_name }}"
@@ -52,9 +56,11 @@
         state: present
 
     # Task 5: Apply NTFS permissions
+    # Purpose: Allows local Users group to modify files
     - name: Set NTFS permissions on Public share
       ansible.windows.win_acl:
         path: "{{ file_share_root }}\\{{ file_share_name }}"
         user: "{{ file_share_user }}"
-        permission: "{{ file_share_permission }}"
+        rights: "{{ file_share_permission }}"
+        type: allow
         state: present
