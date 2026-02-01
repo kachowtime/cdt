@@ -43,7 +43,7 @@
   - name: Enable Guest account
     ansible.windows.win_user:
       name: Guest
-      enabled: yes
+      account_disabled: no
       state: present
 
   # Task 5
