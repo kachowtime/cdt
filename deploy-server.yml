@@ -67,6 +67,6 @@
         name: "{{ file_share_name }}"
         path: "{{ file_share_root }}\\{{ file_share_name }}"
         description: "{{ file_share_description }}"
-        full: "{{ file_share_admin }}"
-        change: "{{ file_share_user }}"
+        full: "{{ file_share_admin[0] }}"    # use single string, not list
+        change: "{{ file_share_user[0] }}"   # use single string, not list
         state: present
