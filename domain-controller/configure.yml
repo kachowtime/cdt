@@ -17,7 +17,7 @@
       loop: "{{ ad_groups }}"
 
     - name: Create Corporate Users
-      community.windows.win_user:
+      microsoft.ad.group:
         name: "{{ item.key }}"
         password: "{{ item.value.password }}"
         groups:
@@ -28,7 +28,7 @@
       loop: "{{ ad_users | dict2items }}"
 
     - name: Create CDT Users
-      community.windows.win_user:
+      microsoft.ad.group:
         name: "{{ item.key }}"
         password: "{{ item.value.password }}"
         groups:
