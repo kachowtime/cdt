@@ -6,7 +6,7 @@
 # This playbook must not be used in production environments.
 
 - name: Deploy Vulnerable Windows Server (Training Environment)
-  hosts: windows
+  hosts: windows_fileserver
   gather_facts: false
   vars_files:
     - vars/vulnerabilities.yml
