@@ -1,25 +1,18 @@
----
 # File: deploy_file_server.yml
 #
-# Purpose
-# This playbook configures a basic Windows Server 2022 file server.
-# It installs the File Server role, creates a directory structure,
-# publishes an SMB share, and applies local NTFS permissions.
+# Purpose:
+# Configures a baseline Windows Server 2022 file server.
+# Installs File Server role, creates folder structure, publishes SMB share,
+# and applies NTFS permissions.
 #
-# Scope
-# This playbook is intended to run on a standalone Windows Server.
-# It does not require Active Directory.
-# Permissions are local only.
+# Scope:
+# Standalone server configuration (no AD required).
+# Local Administrator credentials needed.
 #
-# Intended Use
-# This is a baseline configuration.
-# Domain integration, auditing, and vulnerabilities will be added later.
-#
-# Environment
+# Environment:
 # Windows Server 2022
 # WinRM enabled
-# Local Administrator credentials
-
+# Local Administrator account available
 
 - name: Baseline Windows 2022 File Server
   hosts: windows_fileserver
@@ -27,36 +20,46 @@
 
   tasks:
 
-    # Task 1 -- Install the Windows File Server role.
+    # Task 1 -- Install the Windows File Server role
     - name: Install File Server role
       ansible.windows.win_feature:
         name: FS-FileServer
         state: present
+      become: yes
+      become_method: runas
 
-    # Task 2 -- Create the root directory used to store file shares.
+    # Task 2 -- Create the root directory for all file shares
     - name: Create file share root directory
       ansible.windows.win_file:
         path: "D:\\FileShares"
         state: directory
+      become: yes
+      become_method: runas
 
-    # Task 3 -- Create a public share folder.
+    # Task 3 -- Create a Public folder inside the root directory
     - name: Create Public share folder
       ansible.windows.win_file:
         path: "D:\\FileShares\\Public"
         state: directory
+      become: yes
+      become_method: runas
 
-    # Task 4 -- Create an SMB share named Public.
+    # Task 4 -- Publish the Public folder as an SMB share
     - name: Create SMB Public share
       ansible.windows.win_share:
         name: "Public"
         path: "D:\\FileShares\\Public"
         description: "Public company file share"
         state: present
+      become: yes
+      become_method: runas
 
-    # Task 5 -- Apply NTFS permissions to the Public folder.
+    # Task 5 -- Apply NTFS permissions to the Public folder
     - name: Set NTFS permissions on Public share
       ansible.windows.win_acl:
         path: "D:\\FileShares\\Public"
-        user: "Users"
+        user: "BUILTIN\\Users"
         permission: "Modify"
         state: present
+      become: yes
+      become_method: runas
