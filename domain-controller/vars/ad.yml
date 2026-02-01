@@ -1,11 +1,21 @@
+---
 # Variables for Domain Controller deployment
 
 # Domain info
 domain_name: "cyberpunk.local"
 netbios_name: "CYBERPUNK"
 
-# Administrator password
+# Local Administrator account
+local_admin_user: "Administrator"
 new_admin_password: "YS#olK5L?y!8p$IAlCPp"
 
-# DSRM password
+# DSRM (Directory Services Restore Mode) password
 safe_mode_password: ";b8zJOt2B.OLp~ynR|3Y"
+
+# Domain Admin account (used during promotion)
+domain_admin_user: "{{ local_admin_user }}"
+domain_admin_password: "{{ new_admin_password }}"
+
+# Optional: DNS and other settings
+install_dns: true
+reboot_after_promotion: yes
