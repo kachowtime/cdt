@@ -67,34 +67,4 @@
       protocol=TCP
       localport=3389
 
-  # Task 7
-  # Create the root directory for file shares
-  - name: Create file share root directory
-    ansible.windows.win_file:
-      path: "{{ file_share_root }}"
-      state: directory
 
-  # Task 8
-  # Create an insecure SMB share with full control for Everyone
-  - name: Create insecure SMB share
-    ansible.windows.win_share:
-      name: "{{ file_share_name }}"
-      path: "{{ populate_share_path }}"
-      full: Everyone
-      state: present
-
-  # Task 9
-  # Create cyberpunk-themed subfolders inside the share
-  - name: Create cyberpunk folders
-    ansible.windows.win_file:
-      path: "{{ populate_share_path }}\\{{ item.folder }}"
-      state: directory
-    loop: "{{ populate }}"
-
-  # Task 10
-  # Populate cyberpunk files inside each folder
-  - name: Populate cyberpunk files
-    ansible.windows.win_copy:
-      dest: "{{ populate_share_path }}\\{{ item.0.folder }}\\{{ item.1.name }}"
-      content: "{{ item.1.content }}"
-    loop: "{{ populate | subelements('files') }}"
