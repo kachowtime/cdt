@@ -7,7 +7,7 @@
 #
 # Scope
 # Standalone system
-# Local or domain permissions (controlled via vars)
+# Local permissions only (no domain required)
 #
 # Environment
 # Windows Server 2022
@@ -51,11 +51,14 @@
     - name: Set NTFS permissions on Public share
       ansible.windows.win_acl:
         path: "{{ file_share_root }}\\{{ file_share_name }}"
-        user: "{{ file_share_user }}"
-        rights: "{{ file_share_permission }}"
+        user: "{{ item.user }}"
+        rights: "{{ item.rights }}"
         type: allow
         inheritance: ContainerInherit,ObjectInherit
         state: present
+      loop:
+        - { user: "{{ file_share_admin[0] }}", rights: "FullControl" }
+        - { user: "{{ file_share_user[0] }}", rights: "Modify" }
 
     # Task 5: Create SMB share with permissions
     # Purpose: Publishes the directory over the network
