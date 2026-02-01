@@ -1,9 +1,9 @@
 # File: vars/deploy.yml
 #
-# Purpose: Variables for deploy_file_server.yml
-# Makes the file server path, share name, and users configurable
+# Purpose
+# Variables for the Windows file server deployment
 
-file_share_root: "S:\\FileShares"
+file_share_root: "C:\\FileShares"
 file_share_name: "Public"
 file_share_description: "Public company file share"
 file_share_user: "BUILTIN\\Users"
