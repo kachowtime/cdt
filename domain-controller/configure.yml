@@ -11,7 +11,7 @@
   tasks:
 
     - name: Create Active Directory Groups
-      community.windows.win_ad_group:
+      microsoft.ad.group:
         name: "{{ item }}"
         state: present
       loop: "{{ ad_groups }}"
